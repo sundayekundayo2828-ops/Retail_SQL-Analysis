@@ -1,0 +1,23 @@
+
+--02 analysis (Monthly revenue trend)
+SELECT 
+    strftime('%Y-%m', order_date) AS month,
+    SUM(total_price) AS total_revenue
+FROM sales
+GROUP BY month
+ORDER BY month;
+
+--SELECT order_date, strftime('%Y-%m', order_date)
+FROM sales
+LIMIT 10;
+
+--High value customer
+SELECT 
+    customer_id,
+    customer_name,
+    SUM(total_price) AS total_spent,
+    COUNT(order_id) AS total_orders
+FROM sales
+GROUP BY customer_id, customer_name
+ORDER BY total_spent DESC
+LIMIT 10;
